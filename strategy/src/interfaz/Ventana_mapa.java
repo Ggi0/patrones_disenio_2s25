@@ -198,16 +198,13 @@ public class Ventana_mapa extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_destinoActionPerformed
 
     private void btt_rutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_rutaActionPerformed
-       System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-    System.out.println("║   INICIANDO BÚSQUEDA DE RUTA - PATRÓN STRATEGY          ║");
-    System.out.println("╚══════════════════════════════════════════════════════════╝\n");
     
     // PASO 1: RECOPILAR DATOS
     String origen = txt_origen.getText().trim().toUpperCase();
     String destino = txt_destino.getText().trim().toUpperCase();
     
-    System.out.println("📍 Origen: " + origen);
-    System.out.println("📍 Destino: " + destino);
+    System.out.println("Origen: " + origen);
+    System.out.println("Destino: " + destino);
     
     // VALIDACIÓN 1: Campos vacíos
     if (origen.isEmpty() || destino.isEmpty()) {
@@ -247,14 +244,14 @@ public class Ventana_mapa extends javax.swing.JFrame {
         return;
     }
     
-    System.out.println("✓ Nodos encontrados en el grafo");
+    System.out.println("Nodos encontrados en el grafo");
     
     // PASO 3: CREAR CONTEXTO
     Strategy.CalculadorDeRutas calculador = new Strategy.CalculadorDeRutas();
     
     // PASO 4: SELECCIONAR ESTRATEGIA
     if (rdBtt_auto.isSelected()) {
-        System.out.println("🚗 Usuario seleccionó: AUTOMÓVIL");
+        System.out.println("Usuario seleccionó: AUTOMÓVIL");
         calculador.setEstrategia(new Strategy.RutaEnCarro());
         
     } else if (rdBtt_bicicleta.isSelected()) {
@@ -276,7 +273,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
     }
     
     // PASO 5: CALCULAR RUTA
-    System.out.println("\n⏳ Calculando ruta...");
+    System.out.println("\n Calculando ruta...");
     
     mapa.CalculadorRutas.ResultadoRuta resultado = 
         calculador.calcularRutaOptima(grafo, nodoOrigen, nodoDestino);
@@ -284,7 +281,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
     // PASO 6: MOSTRAR RESULTADOS
     if (resultado != null && resultado.existeRuta()) {
         
-        System.out.println("\n✅ RUTA ENCONTRADA!");
+        System.out.println("\n RUTA ENCONTRADA!");
         System.out.println(resultado.toString());
         
         // Resaltar en el mapa
@@ -296,17 +293,17 @@ public class Ventana_mapa extends javax.swing.JFrame {
         for (int i = 0; i < camino.size(); i++) {
             caminoTexto.append(camino.get(i).getNombre());
             if (i < camino.size() - 1) {
-                caminoTexto.append(" → ");
+                caminoTexto.append(" -> ");
             }
         }
         
         // Mensaje para el usuario
         String mensaje = String.format(
             "═══════ RUTA ENCONTRADA ═══════\n\n" +
-            "🚩 Camino: %s\n\n" +
-            "📏 Distancia: %.2f km\n\n" +
-            "⏱️  Tiempo: %.1f minutos\n\n" +
-            "🚦 Transporte: %s",
+            " Camino: %s\n\n" +
+            " Distancia: %.2f km\n\n" +
+            " Tiempo: %.1f minutos\n\n" +
+            " Transporte: %s",
             caminoTexto.toString(),
             resultado.getDistanciaTotal(),
             resultado.getTiempoTotal(),
@@ -322,13 +319,13 @@ public class Ventana_mapa extends javax.swing.JFrame {
         
     } else {
         
-        System.out.println("\n❌ NO SE ENCONTRÓ RUTA");
+        System.out.println("\n NO SE ENCONTRÓ RUTA");
         mapaPanel.limpiarRuta();
         
         String mensaje = String.format(
             "No existe ruta disponible entre %s y %s\n" +
             "con el transporte seleccionado.\n\n" +
-            "💡 Intente con otro medio de transporte.",
+            " Intente con otro medio de transporte.",
             origen, destino
         );
         
@@ -340,10 +337,6 @@ public class Ventana_mapa extends javax.swing.JFrame {
         );
     }
     
-    System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-    System.out.println("║   BÚSQUEDA FINALIZADA                                    ║");
-    System.out.println("╚══════════════════════════════════════════════════════════╝\n");
-
         
         
     }//GEN-LAST:event_btt_rutaActionPerformed
