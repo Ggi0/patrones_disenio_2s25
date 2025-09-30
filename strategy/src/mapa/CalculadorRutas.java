@@ -103,7 +103,8 @@ public class CalculadorRutas {
             return new ResultadoRuta(caminoDirecto, 0, 0, tipoTransporte);
         }
         
-        // Estructuras para Dijkstra
+        // Estructuras para Dijkstra 
+        // ---> estructura de datos que almacena elementos en pares clave-valor, usando una tabla hash para almacenar y recuperar datos eficientemente
         Map<Nodo, Double> distancias = new HashMap<>();
         Map<Nodo, Nodo> predecesores = new HashMap<>();
         Set<Nodo> visitados = new HashSet<>();

@@ -10,6 +10,19 @@ import mapa.Grafo;
 import mapa.Nodo;
 
 /**
+ * 
+ * 
+ *  * PATRÓN STRATEGY - ESTRATEGIA CONCRETA #3: RUTA CAMINANDO
+ * 
+ * Esta clase implementa la interfaz EstrategiaRuta de forma ESPECÍFICA
+ * para calcular rutas A PIE (caminando).
+ * 
+ * CARACTERÍSTICAS DE ESTA ESTRATEGIA:
+ * - Velocidad promedio: 5 km/h (la más lenta)
+ * - Vías permitidas: CARRETERAS, CICLOVÍAS y SENDEROS
+ * - No puede usar: AUTOPISTAS (prohibido para peatones)
+ * 
+ * 
  *
  * @author gio
  */

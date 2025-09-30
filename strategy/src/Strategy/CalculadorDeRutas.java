@@ -9,20 +9,39 @@ import mapa.Grafo;
 import mapa.Nodo;
 
 /**
+ * 
+ * 
+ * PATRÓN STRATEGY - CONTEXTO
+ * 
+ * Esta clase es el CONTEXTO del patrón Strategy.
+ * 
+ * RESPONSABILIDADES DEL CONTEXTO:
+ * 1. Mantener una referencia a la estrategia actual
+ * 2. Permitir cambiar la estrategia en tiempo de ejecución
+ * 3. Delegar el trabajo a la estrategia sin conocer su implementación
+ * 4. Proporcionar una interfaz simple al cliente
  *
  * @author gio
  */
 public class CalculadorDeRutas {
     
+    // Referencia a la estrategia actual
+    // Este es el NÚCLEO del patrón Strategy:
+    // - Guardamos una referencia a la INTERFAZ, no a una clase concreta
+    // - Esto permite cambiar de estrategia dinámicamente
+    // - El contexto no sabe ni le importa qué estrategia concreta es
     private EstrategiaRuta estrategia;
     
-    public CalculadorDeRutas() {
+    
+    // Crea el contexto sin estrategia inicial.
+    // La estrategia debe establecerse después con setEstrategia().
+    public CalculadorDeRutas() { // constructor VACIO
         this.estrategia = null;
-        System.out.println("✓ Contexto creado (sin estrategia inicial)");
+        System.out.println(" Contexto creado (sin estrategia inicial)");
     }
     
-    
-    public CalculadorDeRutas(EstrategiaRuta estrategia) {
+    // Crea el contexto con una estrategia ya definida.
+    public CalculadorDeRutas(EstrategiaRuta estrategia) { // Constructor con una ESTRATEGIA
         this.estrategia = estrategia;
         System.out.println(" Contexto creado con estrategia: " + 
                           estrategia.obtenerTipoTransporte());
@@ -30,6 +49,14 @@ public class CalculadorDeRutas {
     
     
     
+    /**
+     * MÉTODO CLAVE: CAMBIAR LA ESTRATEGIA EN TIEMPO DE EJECUCIÓN
+     * 
+     * Este método es FUNDAMENTAL en el patrón Strategy.
+     * Permite cambiar el comportamiento del contexto dinámicamente.
+     * 
+     * @param estrategia La nueva estrategia a usar
+     */
     public void setEstrategia(EstrategiaRuta estrategia) {
         
         // Validación: evitar estrategias null
@@ -73,10 +100,6 @@ public class CalculadorDeRutas {
      * si está llamando a RutaEnCarro, RutaEnBicicleta o RutaCaminando.
      * Esto es POLIMORFISMO: un método, múltiples comportamientos.
      * 
-     * EJEMPLO:
-     * - Si estrategia = RutaEnCarro, se ejecuta el código de RutaEnCarro
-     * - Si estrategia = RutaEnBicicleta, se ejecuta el código de RutaEnBicicleta
-     * - El contexto no necesita cambiar su código
      * 
      * @param grafo El mapa completo
      * @param origen Nodo de partida
@@ -113,16 +136,16 @@ public class CalculadorDeRutas {
         // - NO depende de las clases concretas
         // - Puedes agregar nuevas estrategias sin tocar el contexto
         
-        System.out.println("➤ Contexto delegando cálculo a: " + 
+        System.out.println(" Contexto delegando cálculo a: " + 
                           estrategia.obtenerTipoTransporte());
         
         ResultadoRuta resultado = estrategia.calcularRuta(grafo, origen, destino);
         
         // Mensaje de finalización
         if (resultado != null && resultado.existeRuta()) {
-            System.out.println("✓ Ruta calculada exitosamente\n");
+            System.out.println(" Ruta calculada exitosamente\n");
         } else {
-            System.out.println("⚠️  No se encontró ruta disponible\n");
+            System.out.println("  No se encontró ruta disponible\n");
         }
         
         return resultado;

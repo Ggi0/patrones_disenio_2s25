@@ -10,6 +10,21 @@ import mapa.Grafo;
 import mapa.Nodo;
 
 /**
+ * 
+ * 
+ * 
+ * PATRÓN STRATEGY - ESTRATEGIA CONCRETA #2: RUTA EN BICICLETA
+ * 
+ * 
+ * Esta clase implementa la interfaz EstrategiaRuta de forma ESPECÍFICA
+ * para calcular rutas en BICICLETA.
+ * 
+ * CARACTERÍSTICAS DE ESTA ESTRATEGIA:
+ * - Velocidad promedio: 15 km/h (velocidad media)
+ * - Vías permitidas: CARRETERAS, CICLOVÍAS y SENDEROS
+ * - No puede usar: AUTOPISTAS (demasiado peligrosas/prohibidas)
+ * 
+ * 
  *
  * @author gio
  */
@@ -28,11 +43,11 @@ public class RutaEnBicicleta implements EstrategiaRuta {
     public ResultadoRuta calcularRuta(Grafo grafo, Nodo origen, Nodo destino) {
         
         // Mensaje informativo
-        System.out.println("\n═══════════════════════════════════════");
+        System.out.println("\n===================================================");
         System.out.println("   CALCULANDO RUTA EN BICICLETA");
-        System.out.println("   De: " + origen.getNombre() + " → Hasta: " + destino.getNombre());
+        System.out.println("   De: " + origen.getNombre() + " -> Hasta: " + destino.getNombre());
         System.out.println("   Velocidad promedio: " + VELOCIDAD_BICICLETA + " km/h");
-        System.out.println("═══════════════════════════════════════\n");
+        System.out.println("===================================================\n");
         
         // Delega el cálculo con parámetros específicos de bicicleta
         return CalculadorRutas.calcularRutaOptima(

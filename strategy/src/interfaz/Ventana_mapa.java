@@ -197,6 +197,28 @@ public class Ventana_mapa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_destinoActionPerformed
 
+    
+    
+    
+    /*
+    
+    * RESPONSABILIDADES DEL CLIENTE:
+    * 1. Recopilar datos de entrada (origen, destino, transporte)
+    * 2. DECIDIR qué estrategia usar según la selección del usuario
+    * 3. Configurar el contexto con la estrategia elegida
+    * 4. Ejecutar el cálculo a través del contexto
+    * 5. Mostrar los resultados al usuario
+    * 
+    
+    
+    * FLUJO DEL PATRÓN:
+    * Cliente 
+        -> selecciona estrategia 
+            -> Contexto 
+                -> ejecuta 
+                    -> Estrategia Concreta
+    */
+    
     private void btt_rutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_rutaActionPerformed
     
     // PASO 1: RECOPILAR DATOS
@@ -225,8 +247,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
     if (nodoOrigen == null) {
         javax.swing.JOptionPane.showMessageDialog(
             this,
-            "El nodo '" + origen + "' no existe en el mapa.\n" +
-            "Nodos disponibles: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P",
+            "El nodo '" + origen + "' no existe en el mapa.\n",
             "Nodo no encontrado",
             javax.swing.JOptionPane.ERROR_MESSAGE
         );
@@ -236,8 +257,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
     if (nodoDestino == null) {
         javax.swing.JOptionPane.showMessageDialog(
             this,
-            "El nodo '" + destino + "' no existe en el mapa.\n" +
-            "Nodos disponibles: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P",
+            "El nodo '" + destino + "' no existe en el mapa.\n",
             "Nodo no encontrado",
             javax.swing.JOptionPane.ERROR_MESSAGE
         );
@@ -245,6 +265,8 @@ public class Ventana_mapa extends javax.swing.JFrame {
     }
     
     System.out.println("Nodos encontrados en el grafo");
+    
+    
     
     // PASO 3: CREAR CONTEXTO
     Strategy.CalculadorDeRutas calculador = new Strategy.CalculadorDeRutas();
@@ -255,11 +277,11 @@ public class Ventana_mapa extends javax.swing.JFrame {
         calculador.setEstrategia(new Strategy.RutaEnCarro());
         
     } else if (rdBtt_bicicleta.isSelected()) {
-        System.out.println("🚲 Usuario seleccionó: BICICLETA");
+        System.out.println(" Usuario seleccionó: BICICLETA");
         calculador.setEstrategia(new Strategy.RutaEnBicicleta());
         
     } else if (rdBtt_caminar.isSelected()) {
-        System.out.println("🚶 Usuario seleccionó: CAMINANDO");
+        System.out.println(" Usuario seleccionó: CAMINANDO");
         calculador.setEstrategia(new Strategy.RutaCaminando());
         
     } else {
@@ -275,8 +297,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
     // PASO 5: CALCULAR RUTA
     System.out.println("\n Calculando ruta...");
     
-    mapa.CalculadorRutas.ResultadoRuta resultado = 
-        calculador.calcularRutaOptima(grafo, nodoOrigen, nodoDestino);
+    mapa.CalculadorRutas.ResultadoRuta resultado = calculador.calcularRutaOptima(grafo, nodoOrigen, nodoDestino);
     
     // PASO 6: MOSTRAR RESULTADOS
     if (resultado != null && resultado.existeRuta()) {
@@ -299,7 +320,7 @@ public class Ventana_mapa extends javax.swing.JFrame {
         
         // Mensaje para el usuario
         String mensaje = String.format(
-            "═══════ RUTA ENCONTRADA ═══════\n\n" +
+            "============== RUTA ENCONTRADA ============\n" +
             " Camino: %s\n\n" +
             " Distancia: %.2f km\n\n" +
             " Tiempo: %.1f minutos\n\n" +
@@ -338,7 +359,14 @@ public class Ventana_mapa extends javax.swing.JFrame {
     }
     
         
-        
+  
+    
+    
+    
+    
+    
+    
+    
     }//GEN-LAST:event_btt_rutaActionPerformed
 
     private void rdBtt_bicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdBtt_bicicletaActionPerformed
